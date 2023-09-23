@@ -7,14 +7,6 @@ export const CELL_TYPE = {
    */
   GRASS: "GRASS",
   /**
-   * Трава с камушком
-   */
-  GRASS_WITH_STONE: "GRASS_WITH_STONE",
-  /**
-   * Трава с палочкой
-   */
-  GRASS_WITH_STICK: "GRASS_WITH_STICK",
-  /**
    * Песок
    */
   SAND: "SAND",
@@ -22,36 +14,28 @@ export const CELL_TYPE = {
    * Вода
    */
   WATER: "WATER",
-  /**
-   * Вода с рыбкой
-   */
-  WATER_WITH_FISH: "WATER_WITH_FISH",
 } as const;
 
 /**
- * Проходимость клетки
+ * Предмет, который может находиться на траве
  */
-export const CELL_PERMEABILITY = {
+export const GRASS_CELL_ITEM = {
   /**
-   * Проходимая
+   * Палка
    */
-  PERMEABLE: "PERMEABLE",
+  STICK: "STICK",
   /**
-   * Непроходимая
+   * Камень
    */
-  IMPERMEABLE: "IMPERMEABLE",
+  STONE: "STONE",
 } as const;
 
 /**
- * Возможность взаимодействия с клеткой
+ * Предмет, который может находиться в воде
  */
-export const CELL_INTERACTIVITY = {
+export const WATER_CELL_ITEM = {
   /**
-   * Можно взаимодействовать
+   * Рыба
    */
-  INTERACTIVE: "INTERACTIVE",
-  /**
-   * Нельзя взаимодействовать
-   */
-  NON_INTERACTIVE: "NON_INTERACTIVE",
+  FISH: "FISH",
 } as const;

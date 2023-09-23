@@ -1,12 +1,17 @@
-import {
-  CELL_TYPE,
-  CELL_PERMEABILITY,
-  CELL_INTERACTIVITY,
-} from "../../constants/cell";
+import { CELL_TYPE } from "../../constants/cell";
 import { Cell } from "../Cell";
+import type { WaterCellItem } from "../../types/cell";
 
+/**
+ * Клетка воды
+ */
 export class WaterCell extends Cell {
-  type = CELL_TYPE.WATER;
-  permeability = CELL_PERMEABILITY.PERMEABLE;
-  interactivity = CELL_INTERACTIVITY.NON_INTERACTIVE;
+  readonly type = CELL_TYPE.WATER;
+  readonly permeable = false;
+
+  protected declare item: WaterCellItem | null;
+
+  setItem(item: WaterCellItem): this {
+    return super.setItem(item);
+  }
 }

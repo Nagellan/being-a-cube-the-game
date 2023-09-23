@@ -1,18 +1,38 @@
 import { MapEntry } from "./MapEntry";
 import type { IMapEntry } from "./MapEntry";
-import type {
-  CellType,
-  CellPermeability,
-  CellInteractivity,
-} from "../types/cell";
+import type { Coordinate } from "../types/mapEntry";
+import type { CellType, CellItem } from "../types/cell";
 
 interface ICell extends IMapEntry {
+  /**
+   * Тип клетки
+   */
   readonly type: CellType;
-  readonly permeability: CellPermeability;
-  readonly interactivity: CellInteractivity;
-}
+  /**
+   * Проходимость клетки
+   */
+  readonly permeable: boolean;
 
-export interface IInteractiveCell extends ICell {
+  /**
+   * Имеется ли на клетке какой-либо предмет
+   */
+  hasItem: boolean;
+  /**
+   * Установить предмет на клетку
+   */
+  setItem(item: CellItem): ICell;
+  /**
+   * Убрать предмет с клетки
+   */
+  resetItem(): void;
+
+  /**
+   * Можно ли взаимодействовать с клеткой
+   */
+  interactive: boolean;
+  /**
+   * Взаимодействовать с клеткой
+   */
   interact(): void;
 }
 
@@ -20,8 +40,42 @@ export interface IInteractiveCell extends ICell {
  * Клетка
  */
 export abstract class Cell extends MapEntry implements ICell {
-  // уникальные свойства
-  public abstract readonly type: CellType;
-  public abstract readonly permeability: CellPermeability;
-  public abstract readonly interactivity: CellInteractivity;
+  abstract readonly type: CellType;
+  abstract readonly permeable: boolean;
+
+  protected item: CellItem | null = null;
+
+  constructor(x: Coordinate, y: Coordinate, item?: CellItem) {
+    super(x, y);
+
+    if (item) this.item = item;
+  }
+
+  get hasItem(): boolean {
+    return this.item !== null;
+  }
+
+  get interactive(): boolean {
+    return this.hasItem;
+  }
+
+  setItem(item: CellItem): this {
+    this.item = item;
+
+    return this;
+  }
+
+  resetItem(): void {
+    this.item = null;
+  }
+
+  interact(): void {
+    if (this.interactive) {
+      return this.resetItem();
+    }
+
+    throw new Error(
+      `Клетка ${this.type} [${this.x}, ${this.y}] неинтерактивная`
+    );
+  }
 }

@@ -1,7 +1,7 @@
 import type {
   CELL_TYPE,
-  CELL_PERMEABILITY,
-  CELL_INTERACTIVITY,
+  GRASS_CELL_ITEM,
+  WATER_CELL_ITEM,
 } from "../constants/cell";
 import type { Values } from "./helpers";
 
@@ -11,11 +11,16 @@ import type { Values } from "./helpers";
 export type CellType = Values<typeof CELL_TYPE>;
 
 /**
- * Проходимость клетки
+ * Предмет, который может находиться на траве
  */
-export type CellPermeability = Values<typeof CELL_PERMEABILITY>;
+export type GrassCellItem = Values<typeof GRASS_CELL_ITEM>;
 
 /**
- * Возможность взаимодействия с клеткой
+ * Предмет, который может находиться в воде
  */
-export type CellInteractivity = Values<typeof CELL_INTERACTIVITY>;
+export type WaterCellItem = Values<typeof WATER_CELL_ITEM>;
+
+/**
+ * Предмет, который может находиться на клетке
+ */
+export type CellItem = GrassCellItem | WaterCellItem;
