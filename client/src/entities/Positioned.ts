@@ -1,13 +1,13 @@
-import type { Coordinate, Position } from "../types/mapEntry";
+import type { Coordinate, Position } from "../types/positioned";
 
-export interface IMapEntry {
+export interface IPositioned {
   readonly x: Coordinate;
   readonly y: Coordinate;
 
   get position(): Position;
 }
 
-export abstract class MapEntry implements IMapEntry {
+export abstract class Positioned implements IPositioned {
   // координаты
   public readonly x: Coordinate;
   public readonly y: Coordinate;

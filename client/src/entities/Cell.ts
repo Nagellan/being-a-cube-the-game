@@ -1,9 +1,9 @@
-import { MapEntry } from "./MapEntry";
-import type { IMapEntry } from "./MapEntry";
-import type { Coordinate } from "../types/mapEntry";
+import { Positioned } from "./Positioned";
+import type { IPositioned } from "./Positioned";
+import type { Coordinate } from "../types/positioned";
 import type { CellType, CellItem } from "../types/cell";
 
-interface ICell extends IMapEntry {
+interface ICell extends IPositioned {
   /**
    * Тип клетки
    */
@@ -39,7 +39,7 @@ interface ICell extends IMapEntry {
 /**
  * Клетка
  */
-export abstract class Cell extends MapEntry implements ICell {
+export abstract class Cell extends Positioned implements ICell {
   abstract readonly type: CellType;
   abstract readonly permeable: boolean;
 
