@@ -19,8 +19,3 @@ export type CellPermeability = Values<typeof CELL_PERMEABILITY>;
  * Возможность взаимодействия с клеткой
  */
 export type CellInteractivity = Values<typeof CELL_INTERACTIVITY>;
-
-/**
- * Позиция клетки на карте (x, y)
- */
-export type CellPosition = [number, number];
