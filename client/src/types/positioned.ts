@@ -1,9 +1,9 @@
 /**
- * Координата сущности (x или y)
+ * Координата сущности (X или Y)
  */
 export type Coordinate = number;
 
 /**
- * Позиция сущности на карте: x и y координаты
+ * Позиция сущности на карте: X и Y координаты
  */
 export type Position = [Coordinate, Coordinate];

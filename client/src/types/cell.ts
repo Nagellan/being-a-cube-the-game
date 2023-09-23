@@ -1,8 +1,5 @@
-import type {
-  CELL_TYPE,
-  GRASS_CELL_ITEM,
-  WATER_CELL_ITEM,
-} from "../constants/cell";
+import type { CELL_TYPE } from "../constants/cell";
+import type { ITEM } from "../constants/item";
 import type { Values } from "./helpers";
 
 /**
@@ -13,14 +10,9 @@ export type CellType = Values<typeof CELL_TYPE>;
 /**
  * Предмет, который может находиться на траве
  */
-export type GrassCellItem = Values<typeof GRASS_CELL_ITEM>;
+export type GrassCellItem = Values<Pick<typeof ITEM, "STICK" | "STONE">>;
 
 /**
  * Предмет, который может находиться в воде
  */
-export type WaterCellItem = Values<typeof WATER_CELL_ITEM>;
-
-/**
- * Предмет, который может находиться на клетке
- */
-export type CellItem = GrassCellItem | WaterCellItem;
+export type WaterCellItem = Values<Pick<typeof ITEM, "FISH">>;

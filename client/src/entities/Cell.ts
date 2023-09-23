@@ -1,74 +1,69 @@
 import { Positioned } from "./Positioned";
-import type { IPositioned } from "./Positioned";
 import type { Coordinate } from "../types/positioned";
-import type { CellType, CellItem } from "../types/cell";
-
-interface ICell extends IPositioned {
-  /**
-   * Тип клетки
-   */
-  readonly type: CellType;
-  /**
-   * Проходимость клетки
-   */
-  readonly permeable: boolean;
-
-  /**
-   * Имеется ли на клетке какой-либо предмет
-   */
-  hasItem: boolean;
-  /**
-   * Установить предмет на клетку
-   */
-  setItem(item: CellItem): ICell;
-  /**
-   * Убрать предмет с клетки
-   */
-  resetItem(): void;
-
-  /**
-   * Можно ли взаимодействовать с клеткой
-   */
-  interactive: boolean;
-  /**
-   * Взаимодействовать с клеткой
-   */
-  interact(): void;
-}
+import type { CellType } from "../types/cell";
+import type { Item } from "../types/item";
 
 /**
  * Клетка
  */
-export abstract class Cell extends Positioned implements ICell {
+export abstract class Cell extends Positioned {
+  /**
+   * Тип клетки
+   */
   abstract readonly type: CellType;
+  /**
+   * Проходимость клетки
+   */
   abstract readonly permeable: boolean;
 
-  protected item: CellItem | null = null;
+  // Координаты клетки не должны меняться
+  protected declare readonly x: Coordinate;
+  protected declare readonly y: Coordinate;
 
-  constructor(x: Coordinate, y: Coordinate, item?: CellItem) {
+  /**
+   * Предмет, установленный на клетку (или его отсутствие)
+   */
+  protected item: Item | null = null;
+
+  constructor(x: Coordinate, y: Coordinate, item?: Item) {
     super(x, y);
 
     if (item) this.item = item;
   }
 
+  /**
+   * Имеется ли на клетке какой-либо предмет
+   */
   get hasItem(): boolean {
     return this.item !== null;
   }
 
+  /**
+   * Можно ли взаимодействовать с клеткой
+   */
   get interactive(): boolean {
     return this.hasItem;
   }
 
-  setItem(item: CellItem): this {
+  /**
+   * Установить предмет на клетку
+   */
+  setItem(item: Item): this {
     this.item = item;
 
     return this;
   }
 
+  /**
+   * Убрать предмет с клетки
+   */
   resetItem(): void {
     this.item = null;
   }
 
+  /**
+   * Взаимодействовать с клеткой
+   */
   interact(): void {
     if (this.interactive) {
       return this.resetItem();
