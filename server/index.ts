@@ -13,8 +13,9 @@ const server = Bun.serve({
         return new Response(Bun.file("./out/index.js"));
       }
 
-      default:
+      default: {
         return new Response("Not Found!", { status: 404 });
+      }
     }
   },
 });
