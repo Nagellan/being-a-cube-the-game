@@ -2,6 +2,8 @@ const server = Bun.serve({
   async fetch(req: Request) {
     const url = new URL(req.url);
 
+    console.log("Server responded to:", url.pathname);
+
     switch (url.pathname) {
       // html
       case "/": {
@@ -25,4 +27,16 @@ const server = Bun.serve({
   },
 });
 
-console.log(`Listening on http://${server.hostname}:${server.port}`);
+console.log(
+  "Server started.\nListening on:",
+  `http://${server.hostname}:${server.port}`
+);
+
+// Stop server on Ctrl-C
+process.on("SIGINT", () => {
+  console.log("Server stopped");
+
+  server.stop();
+
+  process.exit(0);
+});

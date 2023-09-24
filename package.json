@@ -14,8 +14,8 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "build": "cp -r ./client/public/ ./out/ && bun build ./client/src/index.tsx --outdir ./out",
-    "start": "bun run build --watch",
-    "dev-server": "bun --watch run ./server/index.ts"
+    "build": "bun ./scripts/build.ts",
+    "start": "bun ./scripts/start.ts",
+    "server": "bun ./scripts/server"
   }
 }
