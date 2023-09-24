@@ -26,6 +26,11 @@ export class World {
    */
   private fears: Fear[];
 
+  /**
+   * Таймер времени существования мира
+   */
+  private lifetimeTimer: Timer | null;
+
   constructor() {
     this.lifetime = 0;
     this.startTime = 12;
@@ -33,6 +38,8 @@ export class World {
     this.map = new Map(15);
     this.cube = new Cube(0, 0);
     this.fears = [];
+
+    this.lifetimeTimer = null;
   }
 
   /**
@@ -71,12 +78,60 @@ export class World {
   }
 
   /**
-   * Создать новый мир
+   * Среагировать на нажатие пользователем клавиш
    */
-  create() {
+  protected onKeyDown = (event: KeyboardEvent) => {
+    switch (event.code) {
+      // Ход вверх
+      case "KeyW":
+        this.cube.moveUp();
+        break;
+
+      // Ход вниз
+      case "KeyS":
+        this.cube.moveDown();
+        break;
+
+      // Ход вправо
+      case "KeyD":
+        this.cube.moveRight();
+        break;
+
+      // Ход влево
+      case "KeyA":
+        this.cube.moveLeft();
+        break;
+
+      default:
+        // игнорируем нажатия на любые другие клавиши
+        break;
+    }
+  };
+
+  /**
+   * Запустить мир
+   */
+  start() {
     // Запуск отсчёта времени мира
-    setInterval(() => {
+    this.lifetimeTimer = setInterval(() => {
       this.lifetime += 1;
     }, 10 * 60 * 1000);
+
+    // Запуск отслеживания действий игрока
+    window.addEventListener("keydown", this.onKeyDown);
+  }
+
+  /**
+   * Остановить мир
+   */
+  stop() {
+    // Остановка отсчёта времени мира
+    if (this.lifetimeTimer) {
+      clearInterval(this.lifetimeTimer);
+      this.lifetimeTimer = null;
+    }
+
+    // Остановка отслеживания действий игрока
+    window.removeEventListener("keydown", this.onKeyDown);
   }
 }
