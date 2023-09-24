@@ -13,6 +13,11 @@ const server = Bun.serve({
         return new Response(Bun.file("./out/index.js"));
       }
 
+      // styles
+      case "/styles.css": {
+        return new Response(Bun.file("./out/styles.css"));
+      }
+
       default: {
         return new Response("Not Found!", { status: 404 });
       }

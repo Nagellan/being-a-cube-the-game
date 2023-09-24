@@ -2,7 +2,7 @@ import { Cube } from "./Cube";
 import { Fear } from "./Fear";
 import { Map } from "./Map";
 
-export class World {
+export class Game {
   /**
    * Время существования мира (в часах)
    */
