@@ -1,11 +1,24 @@
 import { Creature } from "./Creature";
+import { FOV } from "./FOV";
+import type { Cell } from "./Cell";
 import type { Coordinate } from "../types/positioned";
 import type { Inventory } from "../types/cube";
 import type { Item } from "../types/item";
 
 export class Cube extends Creature {
+  /**
+   * Максимальное здоровье
+   */
   readonly maxHealth = 100;
+  /**
+   * Текущее здоровье
+   */
   protected health;
+
+  /**
+   * Поле зрения
+   */
+  readonly fov: FOV;
 
   /**
    * Инвентарь
@@ -17,6 +30,17 @@ export class Cube extends Creature {
 
     this.health = this.maxHealth;
     this.inventory = {};
+    this.fov = new FOV(x, y, 2);
+  }
+
+  /**
+   * Переместить кубик
+   */
+  move(x: Coordinate, y: Coordinate) {
+    super.move(x, y);
+
+    // Координаты кубика всегда должны быть центром его поля зрения
+    this.fov.setPosition(x, y);
   }
 
   /**

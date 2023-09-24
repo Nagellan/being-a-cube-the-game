@@ -17,8 +17,8 @@ export abstract class Cell extends Positioned {
   abstract readonly permeable: boolean;
 
   // Координаты клетки не должны меняться
-  protected declare readonly x: Coordinate;
-  protected declare readonly y: Coordinate;
+  declare readonly x: Coordinate;
+  declare readonly y: Coordinate;
 
   /**
    * Предмет, установленный на клетку (или его отсутствие)

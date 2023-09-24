@@ -1,9 +1,14 @@
 import { Creature } from "./Creature";
 import type { Coordinate } from "../types/positioned";
-import type { Item } from "../types/item";
 
 export class Fear extends Creature {
+  /**
+   * Максимальное здоровье
+   */
   readonly maxHealth = 100;
+  /**
+   * Текущее здоровье
+   */
   protected health;
 
   constructor(x: Coordinate, y: Coordinate) {

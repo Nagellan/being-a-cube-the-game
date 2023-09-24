@@ -19,9 +19,17 @@ export abstract class Positioned {
   }
 
   /**
-   * Получить позицию сущности на карте: x и y координаты
+   * Позиция сущности на карте: X и Y координаты
    */
   get position(): Position {
     return [this.x, this.y];
+  }
+
+  /**
+   * Установить позицию сущности на карте: X и Y координаты
+   */
+  setPosition(x: Coordinate, y: Coordinate): void {
+    this.x = x;
+    this.y = y;
   }
 }
