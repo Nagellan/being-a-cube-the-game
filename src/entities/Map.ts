@@ -1,6 +1,6 @@
 import { GrassCell } from "./cells/GrassCell";
 import { getX, getY, getXIndex, getYIndex } from "../utils/geometry";
-import type { Cell } from "./Cell";
+import { Cell } from "./Cell";
 import type { MapData } from "../types/map";
 import type { Coordinate } from "../types/positioned";
 
@@ -16,11 +16,11 @@ export class Map {
   /**
    * Размер карты (значение ширины и высоты) — нечетный
    */
-  private size: number;
+  readonly size: number;
   /**
    * Данные карты в виде двухмерного массива клеток
    */
-  private data: MapData;
+  readonly data: MapData;
 
   constructor(size: number) {
     this.size = size;
@@ -28,16 +28,18 @@ export class Map {
   }
 
   /**
-   * Собрать карту
+   * Получить клетку по её координатам
    */
-  build(): MapData {
-    return this.data;
+  getCellByCoordinates(x: Coordinate, y: Coordinate): Cell {
+    return this.data[getXIndex(y, this.size)][getYIndex(x, this.size)];
   }
 
   /**
-   * Получить клетку по её координатам
+   * Получить клетку по её id
    */
-  getCell(x: Coordinate, y: Coordinate): Cell {
-    return this.data[getXIndex(y, this.size)][getYIndex(x, this.size)];
+  getCellById(id: string): Cell {
+    const [x, y] = Cell.parseId(id);
+
+    return this.getCellByCoordinates(x, y);
   }
 }

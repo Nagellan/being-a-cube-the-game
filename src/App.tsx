@@ -1,3 +1,12 @@
+import { Map } from "./components/Map";
+import { GameProvider } from "./providers/game";
+
 export const App = () => {
-  return <div>oops</div>;
+  return (
+    <GameProvider>
+      <div className="game">
+        <Map />
+      </div>
+    </GameProvider>
+  );
 };

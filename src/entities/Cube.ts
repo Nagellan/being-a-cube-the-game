@@ -1,6 +1,5 @@
 import { Creature } from "./Creature";
 import { FOV } from "./FOV";
-import type { Cell } from "./Cell";
 import type { Coordinate } from "../types/positioned";
 import type { Inventory } from "../types/cube";
 import type { Item } from "../types/item";

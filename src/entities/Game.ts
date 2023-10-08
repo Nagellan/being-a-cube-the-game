@@ -16,15 +16,15 @@ export class Game {
   /**
    * Карта мира
    */
-  private map: Map;
+  readonly map: Map;
   /**
    * Кубик — гг, управляемый персонаж
    */
-  private cube: Cube;
+  readonly cube: Cube;
   /**
    * Страхи — враги кубика
    */
-  private fears: Fear[];
+  readonly fears: Fear[];
 
   /**
    * Таймер времени существования мира
@@ -115,7 +115,7 @@ export class Game {
     // Запуск отсчёта времени мира
     this.lifetimeTimer = setInterval(() => {
       this.lifetime += 1;
-    }, 10 * 60 * 1000);
+    }, 5 * 60 * 1000);
 
     // Запуск отслеживания действий игрока
     window.addEventListener("keydown", this.onKeyDown);

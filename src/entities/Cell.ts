@@ -1,12 +1,32 @@
 import { Positioned } from "./Positioned";
-import type { Coordinate } from "../types/positioned";
+import type { Coordinate, Position } from "../types/positioned";
 import type { CellType } from "../types/cell";
 import type { Item } from "../types/item";
+
+const DELIMITER = "_";
+
+/**
+ * Создаёт id клетки по её координатам
+ */
+const createId = (x: Coordinate, y: Coordinate): string =>
+  [x, y].join(DELIMITER);
+
+/**
+ * Парсит id клетки, возвращая её координаты
+ */
+const parseId = (id: string): Position => {
+  const [x, y] = id.split(DELIMITER);
+
+  return [Number(x), Number(y)];
+};
 
 /**
  * Клетка
  */
 export abstract class Cell extends Positioned {
+  static createId = createId;
+  static parseId = parseId;
+
   /**
    * Тип клетки
    */
@@ -29,6 +49,13 @@ export abstract class Cell extends Positioned {
     super(x, y);
 
     if (item) this.item = item;
+  }
+
+  /**
+   * Уникальный идентификатор клетки
+   */
+  get id(): string {
+    return createId(this.x, this.y);
   }
 
   /**

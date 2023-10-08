@@ -1,0 +1,19 @@
+.game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.map {
+    display: grid;
+    grid-template-columns: repeat(15, 40px);
+    grid-template-rows: repeat(15, 40px);
+    gap: 4px;
+    grid-auto-flow: row;
+}
+
+.cell {
+    background-color: #BEF2C9;
+    border-radius: 4px;
+}
