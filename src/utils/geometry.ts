@@ -56,5 +56,5 @@ export const getIsPointInsideCircle = (
 ) => {
   const d = Math.sqrt(Math.pow(xp - xc, 2) + Math.pow(yp - yc, 2));
 
-  return Math.pow(r, 2) <= Math.pow(d, 2);
+  return Math.pow(d, 2) <= Math.pow(r, 2);
 };
