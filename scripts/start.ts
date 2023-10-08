@@ -32,17 +32,25 @@ const execBuild = (printStdout: boolean = true) =>
 
 let buildProcess = execBuild();
 
-const buildWatcher = watch("./src", { recursive: true }, () => {
+const buildSrcWatcher = watch("./src", { recursive: true }, () => {
   buildProcess.kill();
   buildProcess = execBuild(false);
 
-  console.log("Build updated");
+  console.log("Build src updated");
+});
+
+const buildPublicWatcher = watch("./public", { recursive: true }, () => {
+  buildProcess.kill();
+  buildProcess = execBuild(false);
+
+  console.log("Build public updated");
 });
 
 // Stop process on Ctrl-C
 process.on("SIGINT", () => {
   buildProcess.kill();
-  buildWatcher.close();
+  buildSrcWatcher.close();
+  buildPublicWatcher.close();
 
   serverProcess.kill();
 
