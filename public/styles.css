@@ -30,10 +30,26 @@ body {
   transition: top 100ms ease-out, left 100ms ease-out;
 }
 
-.cell {
+.map .__cell {
   border-radius: var(--cell-border-radius);
 
+  transition: background-color 500ms ease-out;
+}
+
+.map .__cell.__cell--blank {
   background-color: white;
+}
+
+.map .__cell.__cell--grass {
+  background-color: #bef2c9;
+}
+
+.map .__cell.__cell--sand {
+  background-color: #fbe9ab;
+}
+
+.map .__cell.__cell--water {
+  background-color: #c4e2fc;
 }
 
 .cube {

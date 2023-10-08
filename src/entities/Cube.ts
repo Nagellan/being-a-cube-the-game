@@ -36,10 +36,12 @@ export class Cube extends Creature {
    * Переместить кубик
    */
   move(x: Coordinate, y: Coordinate) {
-    super.move(x, y);
+    // FIXME: кубик вылезает за пределы карты
 
     // Координаты кубика всегда должны быть центром его поля зрения
     this.fov.setPosition(x, y);
+
+    super.move(x, y);
   }
 
   /**

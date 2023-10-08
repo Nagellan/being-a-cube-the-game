@@ -29,9 +29,9 @@ export abstract class Creature extends Positioned {
    * Поменять позицию на карте
    */
   move(x: Coordinate, y: Coordinate): void {
-    this.moveListener?.(x, y);
+    super.setPosition(x, y);
 
-    return super.setPosition(x, y);
+    this.moveListener?.(x, y);
   }
 
   /**
