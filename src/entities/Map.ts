@@ -31,7 +31,7 @@ export class Map {
    * Получить клетку по её координатам
    */
   getCellByCoordinates(x: Coordinate, y: Coordinate): Cell {
-    return this.data[getXIndex(y, this.size)][getYIndex(x, this.size)];
+    return this.data[getYIndex(y, this.size)][getXIndex(x, this.size)];
   }
 
   /**
