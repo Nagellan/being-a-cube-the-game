@@ -1,19 +1,47 @@
+:root {
+  --cell-size: 40px;
+  --cell-border-radius: 4px;
+}
+
+body {
+  margin: 0;
+}
+
 .game {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  background-color: #f5fdf7;
 }
 
 .map {
-    display: grid;
-    grid-template-columns: repeat(15, 40px);
-    grid-template-rows: repeat(15, 40px);
-    gap: 4px;
-    grid-auto-flow: row;
+  display: grid;
+  grid-template-columns: repeat(15, var(--cell-size));
+  grid-template-rows: repeat(15, var(--cell-size));
+  gap: 4px;
+  grid-auto-flow: row;
+
+  border-radius: 32px;
+  overflow: hidden;
+
+  position: relative;
+  transition: top 100ms ease-out, left 100ms ease-out;
 }
 
 .cell {
-    background-color: #BEF2C9;
-    border-radius: 4px;
+  border-radius: var(--cell-border-radius);
+
+  background-color: white;
+}
+
+.cube {
+  height: var(--cell-size);
+  width: var(--cell-size);
+  border-radius: var(--cell-border-radius);
+
+  position: absolute;
+
+  background-color: #1e1e1e;
 }

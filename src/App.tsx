@@ -1,4 +1,5 @@
 import { Map } from "./components/Map";
+import { Cube } from "./components/Cube";
 import { GameProvider } from "./providers/game";
 
 export const App = () => {
@@ -6,6 +7,7 @@ export const App = () => {
     <GameProvider>
       <div className="game">
         <Map />
+        <Cube />
       </div>
     </GameProvider>
   );
