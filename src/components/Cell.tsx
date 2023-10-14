@@ -1,7 +1,25 @@
 import { useMemo } from "react";
 
 import { useGame } from "../hooks/useGame";
+import { ITEM } from "../constants/item";
 import type { CellType } from "../types/cell";
+import type { Item } from "../types/item";
+
+const getItem = (item: Item | null) => {
+  switch (item) {
+    case ITEM.STICK: {
+      return "🦯";
+    }
+    case ITEM.STONE: {
+      return "🪨";
+    }
+    case ITEM.FISH: {
+      return "🐟";
+    }
+    default:
+      break;
+  }
+};
 
 const getClassName = (type: CellType, visible: boolean) => {
   let className = "__cell";
@@ -27,6 +45,8 @@ export const Cell = ({ id }: Props) => {
   return (
     <div
       className={getClassName(cell.type, cube.fov.includes(...cell.position))}
-    ></div>
+    >
+      {getItem(cell.item)}
+    </div>
   );
 };

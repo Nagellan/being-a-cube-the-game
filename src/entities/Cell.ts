@@ -43,7 +43,7 @@ export abstract class Cell extends Positioned {
   /**
    * Предмет, установленный на клетку (или его отсутствие)
    */
-  protected item: Item | null = null;
+  item: Item | null = null;
 
   constructor(x: Coordinate, y: Coordinate, item?: Item) {
     super(x, y);

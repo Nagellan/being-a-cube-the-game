@@ -9,7 +9,7 @@ export class WaterCell extends Cell {
   readonly type = CELL_TYPE.WATER;
   readonly permeable = false;
 
-  protected declare item: WaterCellItem | null;
+  declare item: WaterCellItem | null;
 
   setItem(item: WaterCellItem): this {
     return super.setItem(item);

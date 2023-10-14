@@ -9,7 +9,7 @@ export class GrassCell extends Cell {
   readonly type = CELL_TYPE.GRASS;
   readonly permeable = true;
 
-  protected declare item: GrassCellItem | null;
+  declare item: GrassCellItem | null;
 
   setItem(item: GrassCellItem): this {
     return super.setItem(item);

@@ -35,11 +35,17 @@ body {
 .map .__cell {
   border-radius: var(--cell-border-radius);
 
-  transition: background-color 500ms ease-out;
+  color: black;
+  transition: background-color 500ms ease-out, color 250ms ease-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .map .__cell.__cell--blank {
   background-color: white;
+  color: transparent;
 }
 
 .map .__cell.__cell--grass {
