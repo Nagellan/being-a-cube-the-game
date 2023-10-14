@@ -3,20 +3,20 @@ import type { Coordinate } from "../types/positioned";
 /**
  * Получить координату X относительно центра матрицы
  *
- * @param x    координата X относительно левого-верхнего угла матрицы
- * @param size радиус матрицы
+ * @param xIndex координата X относительно левого-верхнего угла матрицы
+ * @param size   радиус матрицы
  */
-export const getX = (x: number, size: number): Coordinate =>
-  x - Math.floor(size / 2);
+export const getX = (xIndex: number, size: number): Coordinate =>
+  xIndex - Math.floor(size / 2);
 
 /**
  * Получить координату Y относительно центра матрицы
  *
- * @param y    координата Y относительно левого-верхнего угла матрицы
- * @param size радиус матрицы
+ * @param yIndex координата Y относительно левого-верхнего угла матрицы
+ * @param size   радиус матрицы
  */
-export const getY = (y: number, size: number): Coordinate =>
-  Math.floor(size / 2) - y;
+export const getY = (yIndex: number, size: number): Coordinate =>
+  Math.floor(size / 2) - yIndex;
 
 /**
  * Получить координату X относительно левого-верхнего угла матрицы

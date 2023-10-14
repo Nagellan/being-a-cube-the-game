@@ -1,6 +1,8 @@
 import { Cube } from "./Cube";
+import { FOV } from "./FOV";
 import { Fear } from "./Fear";
 import { Map } from "./Map";
+import type { Position } from "../types/positioned";
 
 export class Game {
   /**
@@ -36,7 +38,11 @@ export class Game {
     this.startTime = 12;
 
     this.map = new Map(15);
-    this.cube = new Cube(0, 0);
+
+    const initialPosition: Position = [0, 0];
+    const fov = new FOV(initialPosition, 2, this.map);
+
+    this.cube = new Cube(initialPosition, fov);
     this.fears = [];
 
     this.lifetimeTimer = null;
@@ -52,66 +58,70 @@ export class Game {
   /**
    * Время суток — утро (с 6 до 12)
    */
-  get isMorning() {
+  get isMorning(): boolean {
     return this.time >= 6 && this.time < 12;
   }
 
   /**
    * Время суток — день (с 12 до 18)
    */
-  get isAfternoon() {
+  get isAfternoon(): boolean {
     return this.time >= 12 && this.time < 18;
   }
 
   /**
    * Время суток — вечер (с 18 до полуночи)
    */
-  get isEvening() {
+  get isEvening(): boolean {
     return this.time >= 18;
   }
 
   /**
    * Время суток — ночь (с полуночи до 6)
    */
-  get isNight() {
+  get isNight(): boolean {
     return this.time < 6;
   }
 
   /**
    * Среагировать на нажатие пользователем клавиш
    */
-  protected onKeyDown = (event: KeyboardEvent) => {
-    switch (event.code) {
-      // Ход вверх
-      case "KeyW":
-        this.cube.moveUp();
-        break;
+  protected onKeyDown = (event: KeyboardEvent): void => {
+    try {
+      switch (event.code) {
+        // Ход вверх
+        case "KeyW":
+          this.cube.moveUp();
+          break;
 
-      // Ход вниз
-      case "KeyS":
-        this.cube.moveDown();
-        break;
+        // Ход вниз
+        case "KeyS":
+          this.cube.moveDown();
+          break;
 
-      // Ход вправо
-      case "KeyD":
-        this.cube.moveRight();
-        break;
+        // Ход вправо
+        case "KeyD":
+          this.cube.moveRight();
+          break;
 
-      // Ход влево
-      case "KeyA":
-        this.cube.moveLeft();
-        break;
+        // Ход влево
+        case "KeyA":
+          this.cube.moveLeft();
+          break;
 
-      default:
-        // игнорируем нажатия на любые другие клавиши
-        break;
+        default:
+          // игнорируем нажатия на любые другие клавиши
+          break;
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   /**
    * Запустить мир
    */
-  start() {
+  start(): void {
     // Запуск отсчёта времени мира
     this.lifetimeTimer = setInterval(() => {
       this.lifetime += 1;
@@ -124,7 +134,7 @@ export class Game {
   /**
    * Остановить мир
    */
-  stop() {
+  stop(): void {
     // Остановка отсчёта времени мира
     if (this.lifetimeTimer) {
       clearInterval(this.lifetimeTimer);

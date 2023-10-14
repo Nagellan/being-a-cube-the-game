@@ -1,6 +1,6 @@
 import { Creature } from "./Creature";
-import { FOV } from "./FOV";
-import type { Coordinate } from "../types/positioned";
+import type { FOV } from "./FOV";
+import type { Coordinate, Position } from "../types/positioned";
 import type { Inventory } from "../types/cube";
 import type { Item } from "../types/item";
 
@@ -24,22 +24,33 @@ export class Cube extends Creature {
    */
   protected inventory: Inventory;
 
-  constructor(x: Coordinate, y: Coordinate) {
+  constructor([x, y]: Position, fov: FOV) {
     super(x, y);
 
     this.health = this.maxHealth;
     this.inventory = {};
-    this.fov = new FOV(x, y, 2);
+    this.fov = fov;
+  }
+
+  /**
+   * Установить позицию сущности на карте: X и Y координаты
+   */
+  setPosition(x: number, y: number): void {
+    // Координаты кубика всегда должны быть центром его поля зрения
+    this.fov.setPosition(x, y);
+
+    super.setPosition(x, y);
   }
 
   /**
    * Переместить кубик
    */
   move(x: Coordinate, y: Coordinate) {
-    // FIXME: кубик вылезает за пределы карты
+    const cell = this.fov.getCell(x, y);
 
-    // Координаты кубика всегда должны быть центром его поля зрения
-    this.fov.setPosition(x, y);
+    if (!cell.permeable) {
+      throw new Error(`Нельзя ходить на непроходимые клетки: (${x}, ${y})`);
+    }
 
     super.move(x, y);
   }

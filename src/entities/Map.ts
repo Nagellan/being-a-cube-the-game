@@ -1,3 +1,4 @@
+import { WaterCell } from "./cells/WaterCell";
 import { GrassCell } from "./cells/GrassCell";
 import { getX, getY, getXIndex, getYIndex } from "../utils/geometry";
 import { Cell } from "./Cell";
@@ -5,11 +6,21 @@ import type { MapData } from "../types/map";
 import type { Coordinate } from "../types/positioned";
 
 const createFlatMap = (size: number): MapData =>
-  Array.from({ length: size }, (_, y) =>
-    Array.from(
-      { length: size },
-      (_, x) => new GrassCell(getX(x, size), getY(y, size))
-    )
+  Array.from({ length: size }, (_, yIndex) =>
+    Array.from({ length: size }, (_, xIndex) => {
+      const x = getX(xIndex, size);
+      const y = getY(yIndex, size);
+
+      // внутренний край карты
+      if (
+        Math.abs(x) === Math.floor(size / 2) ||
+        Math.abs(y) === Math.floor(size / 2)
+      ) {
+        return new WaterCell(x, y);
+      }
+
+      return new GrassCell(x, y);
+    })
   );
 
 export class Map {
