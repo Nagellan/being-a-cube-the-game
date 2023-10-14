@@ -1,5 +1,6 @@
 :root {
   --cell-size: 40px;
+  --map-gap: 4px;
   --cell-border-radius: 4px;
 }
 
@@ -13,18 +14,19 @@ body {
   justify-content: center;
   height: 100%;
 
+  overflow: hidden;
+
   background-color: #f5fdf7;
 }
 
 .map {
   display: grid;
-  grid-template-columns: repeat(15, var(--cell-size));
-  grid-template-rows: repeat(15, var(--cell-size));
-  gap: 4px;
+  gap: var(--map-gap);
   grid-auto-flow: row;
 
   border-radius: 32px;
   overflow: hidden;
+  flex-shrink: 0;
 
   position: relative;
   transition: top 100ms ease-out, left 100ms ease-out;

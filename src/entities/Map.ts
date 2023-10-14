@@ -1,27 +1,8 @@
-import { WaterCell } from "./cells/WaterCell";
-import { GrassCell } from "./cells/GrassCell";
-import { getX, getY, getXIndex, getYIndex } from "../utils/geometry";
 import { Cell } from "./Cell";
+import { MAP } from "../constants/map";
+import { getXIndex, getYIndex } from "../utils/geometry";
 import type { MapData } from "../types/map";
 import type { Coordinate } from "../types/positioned";
-
-const createFlatMap = (size: number): MapData =>
-  Array.from({ length: size }, (_, yIndex) =>
-    Array.from({ length: size }, (_, xIndex) => {
-      const x = getX(xIndex, size);
-      const y = getY(yIndex, size);
-
-      // внутренний край карты
-      if (
-        Math.abs(x) === Math.floor(size / 2) ||
-        Math.abs(y) === Math.floor(size / 2)
-      ) {
-        return new WaterCell(x, y);
-      }
-
-      return new GrassCell(x, y);
-    })
-  );
 
 export class Map {
   /**
@@ -33,9 +14,9 @@ export class Map {
    */
   readonly data: MapData;
 
-  constructor(size: number) {
-    this.size = size;
-    this.data = createFlatMap(size);
+  constructor() {
+    this.data = MAP;
+    this.size = MAP.length;
   }
 
   /**

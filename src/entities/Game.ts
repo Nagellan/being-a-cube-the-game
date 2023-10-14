@@ -37,7 +37,7 @@ export class Game {
     this.lifetime = 0;
     this.startTime = 12;
 
-    this.map = new Map(15);
+    this.map = new Map();
 
     const initialPosition: Position = [0, 0];
     const fov = new FOV(initialPosition, 2, this.map);
