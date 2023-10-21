@@ -31,7 +31,7 @@ export class FOV extends Positioned {
   getCell(x: Coordinate, y: Coordinate): Cell {
     if (!this.includes(x, y)) {
       throw new Error(
-        `Нельзя получить клетку ФОВа, которая в нём не находится: (${x}, ${y})`
+        `Нельзя получить клетку ФОВа, которая в нём не находится: (${x}, ${y})`,
       );
     }
 

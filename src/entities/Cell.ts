@@ -97,7 +97,7 @@ export abstract class Cell extends Positioned {
     }
 
     throw new Error(
-      `Клетка ${this.type} [${this.x}, ${this.y}] неинтерактивная`
+      `Клетка ${this.type} [${this.x}, ${this.y}] неинтерактивная`,
     );
   }
 }

@@ -31,7 +31,7 @@ export const Map = () => {
       {map.data.map((row) =>
         row.map((cell) => {
           return <Cell key={cell.id} id={cell.id} />;
-        })
+        }),
       )}
     </div>
   );

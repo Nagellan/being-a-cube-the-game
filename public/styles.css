@@ -29,14 +29,18 @@ body {
   flex-shrink: 0;
 
   position: relative;
-  transition: top 100ms ease-out, left 100ms ease-out;
+  transition:
+    top 100ms ease-out,
+    left 100ms ease-out;
 }
 
 .map .__cell {
   border-radius: var(--cell-border-radius);
 
   color: black;
-  transition: background-color 500ms ease-out, color 250ms ease-out;
+  transition:
+    background-color 500ms ease-out,
+    color 250ms ease-out;
 
   display: flex;
   align-items: center;

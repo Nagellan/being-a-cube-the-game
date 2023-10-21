@@ -60,7 +60,7 @@ export const getIsPointInsideCircle = (
   xc: number,
   yc: number,
   r: number,
-  thresholdReduction = BEAUTY_COEFFICIENT
+  thresholdReduction = BEAUTY_COEFFICIENT,
 ) => {
   const d = Math.sqrt(Math.pow(xp - xc, 2) + Math.pow(yp - yc, 2));
 

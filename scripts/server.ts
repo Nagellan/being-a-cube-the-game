@@ -29,7 +29,7 @@ const server = Bun.serve({
 
 console.log(
   "Server started.\nListening on:",
-  `http://${server.hostname}:${server.port}`
+  `http://${server.hostname}:${server.port}`,
 );
 
 // Stop server on Ctrl-C

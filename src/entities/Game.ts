@@ -123,9 +123,12 @@ export class Game {
    */
   start(): void {
     // Запуск отсчёта времени мира
-    this.lifetimeTimer = setInterval(() => {
-      this.lifetime += 1;
-    }, 5 * 60 * 1000);
+    this.lifetimeTimer = setInterval(
+      () => {
+        this.lifetime += 1;
+      },
+      5 * 60 * 1000,
+    );
 
     // Запуск отслеживания действий игрока
     window.addEventListener("keydown", this.onKeyDown);
