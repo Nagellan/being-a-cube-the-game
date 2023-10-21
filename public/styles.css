@@ -70,7 +70,7 @@ body {
 
 .map .__cell .__item.__item--enter-active,
 .map .__cell .__item.__item--exit-active {
-	transition: opacity 250ms ease-out;
+	transition: opacity var(--delay) ease-out;
 }
 
 .map .__cell .__item.__item--enter-active,

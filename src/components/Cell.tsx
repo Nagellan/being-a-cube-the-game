@@ -6,6 +6,8 @@ import { ITEM } from '../constants/item';
 import type { CellType } from '../types/cell';
 import type { Item } from '../types/item';
 
+const TIMEOUT = 250;
+
 const getItem = (item: Item | null) => {
 	switch (item) {
 		case ITEM.STICK: {
@@ -52,12 +54,16 @@ export const Cell = ({ id }: Props) => {
 			<CSSTransition
 				in={visible}
 				nodeRef={nodeRef}
-				timeout={250}
+				timeout={TIMEOUT}
 				classNames="__item-"
 				mountOnEnter
 				unmountOnExit
 			>
-				<div ref={nodeRef} className="__item">
+				<div
+					ref={nodeRef}
+					className="__item"
+					style={{ '--delay': `${TIMEOUT}ms` }}
+				>
 					{getItem(cell.item)}
 				</div>
 			</CSSTransition>
