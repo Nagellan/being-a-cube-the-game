@@ -1,5 +1,5 @@
-import type { ITEM } from "../constants/item";
-import type { Values } from "./helpers";
+import type { ITEM } from '../constants/item';
+import type { Values } from './helpers';
 
 /**
  * Предмет

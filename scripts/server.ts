@@ -1,42 +1,42 @@
 const server = Bun.serve({
-  async fetch(req: Request) {
-    const url = new URL(req.url);
+	async fetch(req: Request) {
+		const url = new URL(req.url);
 
-    console.log("Server responded to:", url.pathname);
+		console.log('Server responded to:', url.pathname);
 
-    switch (url.pathname) {
-      // html
-      case "/": {
-        return new Response(Bun.file("./out/index.html"));
-      }
+		switch (url.pathname) {
+			// html
+			case '/': {
+				return new Response(Bun.file('./out/index.html'));
+			}
 
-      // scripts
-      case "/index.js": {
-        return new Response(Bun.file("./out/index.js"));
-      }
+			// scripts
+			case '/index.js': {
+				return new Response(Bun.file('./out/index.js'));
+			}
 
-      // styles
-      case "/styles.css": {
-        return new Response(Bun.file("./out/styles.css"));
-      }
+			// styles
+			case '/styles.css': {
+				return new Response(Bun.file('./out/styles.css'));
+			}
 
-      default: {
-        return new Response("Not Found!", { status: 404 });
-      }
-    }
-  },
+			default: {
+				return new Response('Not Found!', { status: 404 });
+			}
+		}
+	},
 });
 
 console.log(
-  "Server started.\nListening on:",
-  `http://${server.hostname}:${server.port}`,
+	'Server started.\nListening on:',
+	`http://${server.hostname}:${server.port}`,
 );
 
 // Stop server on Ctrl-C
-process.on("SIGINT", () => {
-  console.log("Server stopped");
+process.on('SIGINT', () => {
+	console.log('Server stopped');
 
-  server.stop();
+	server.stop();
 
-  process.exit(0);
+	process.exit(0);
 });

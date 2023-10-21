@@ -1,19 +1,19 @@
-import { useEffect } from "react";
-import type { ReactNode } from "react";
+import React, { useEffect } from 'react';
+import type { ReactNode } from 'react';
 
-import { Game } from "../entities/Game";
-import { GameContext } from "../contexts/game";
+import { Game } from '../entities/Game';
+import { GameContext } from '../contexts/game';
 
 type Props = {
-  children: ReactNode;
+	children: ReactNode;
 };
 
 const game = new Game();
 
 export const GameProvider = ({ children }: Props) => {
-  useEffect(() => {
-    game.start();
-  }, []);
+	useEffect(() => {
+		game.start();
+	}, []);
 
-  return <GameContext.Provider value={game}>{children}</GameContext.Provider>;
+	return <GameContext.Provider value={game}>{children}</GameContext.Provider>;
 };

@@ -1,26 +1,38 @@
 {
-  "name": "being-a-cube-the-game",
-  "module": "index.tsx",
-  "type": "module",
-  "devDependencies": {
-    "@types/react-dom": "^18.2.7",
-    "bun-types": "latest",
-    "prettier": "^3.0.3"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "scripts": {
-    "build": "bun ./scripts/build.ts",
-    "start": "bun ./scripts/start.ts",
-    "server": "bun ./scripts/server",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
-  }
+	"name": "being-a-cube-the-game",
+	"module": "index.tsx",
+	"type": "module",
+	"devDependencies": {
+		"@types/react-dom": "^18.2.7",
+		"@typescript-eslint/eslint-plugin": "^6.8.0",
+		"@typescript-eslint/parser": "^6.8.0",
+		"bun-types": "latest",
+		"eslint": "^8.52.0",
+		"eslint-plugin-react": "^7.33.2",
+		"husky": "^8.0.3",
+		"prettier": "^3.0.3",
+		"typescript": "^5.2.2"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"scripts": {
+		"build": "bun ./scripts/build.ts",
+		"start": "bun ./scripts/start.ts",
+		"server": "bun ./scripts/server",
+		"prepare": "husky install",
+		"lint": "bun lint:code ; bun lint:style",
+		"lint:fix": "bun lint:code:fix ; bun lint:style:fix",
+		"lint:code": "bun eslint .",
+		"lint:style": "bun prettier . --check",
+		"lint:code:fix": "bun eslint . --fix",
+		"lint:style:fix": "bun prettier . --write --ignore-unknown"
+	},
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown"
+	}
 }

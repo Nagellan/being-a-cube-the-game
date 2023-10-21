@@ -1,4 +1,4 @@
-import type { Cell } from "../entities/Cell";
+import type { Cell } from '../entities/Cell';
 
 /**
  * Матрица клеток

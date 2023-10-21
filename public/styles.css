@@ -1,75 +1,75 @@
 :root {
-  --cell-size: 40px;
-  --map-gap: 4px;
-  --cell-border-radius: 4px;
+	--cell-size: 40px;
+	--map-gap: 4px;
+	--cell-border-radius: 4px;
 }
 
 body {
-  margin: 0;
+	margin: 0;
 }
 
 .game {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 
-  overflow: hidden;
+	overflow: hidden;
 
-  background-color: #f5fdf7;
+	background-color: #f5fdf7;
 }
 
 .map {
-  display: grid;
-  gap: var(--map-gap);
-  grid-auto-flow: row;
+	display: grid;
+	gap: var(--map-gap);
+	grid-auto-flow: row;
 
-  border-radius: 32px;
-  overflow: hidden;
-  flex-shrink: 0;
+	border-radius: 32px;
+	overflow: hidden;
+	flex-shrink: 0;
 
-  position: relative;
-  transition:
-    top 100ms ease-out,
-    left 100ms ease-out;
+	position: relative;
+	transition:
+		top 100ms ease-out,
+		left 100ms ease-out;
 }
 
 .map .__cell {
-  border-radius: var(--cell-border-radius);
+	border-radius: var(--cell-border-radius);
 
-  color: black;
-  transition:
-    background-color 500ms ease-out,
-    color 250ms ease-out;
+	color: black;
+	transition:
+		background-color 500ms ease-out,
+		color 250ms ease-out;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .map .__cell.__cell--blank {
-  background-color: white;
-  color: transparent;
+	background-color: white;
+	color: transparent;
 }
 
 .map .__cell.__cell--grass {
-  background-color: #bef2c9;
+	background-color: #bef2c9;
 }
 
 .map .__cell.__cell--sand {
-  background-color: #fbe9ab;
+	background-color: #fbe9ab;
 }
 
 .map .__cell.__cell--water {
-  background-color: #c4e2fc;
+	background-color: #c4e2fc;
 }
 
 .cube {
-  height: var(--cell-size);
-  width: var(--cell-size);
-  border-radius: var(--cell-border-radius);
+	height: var(--cell-size);
+	width: var(--cell-size);
+	border-radius: var(--cell-border-radius);
 
-  position: absolute;
+	position: absolute;
 
-  background-color: #1e1e1e;
+	background-color: #1e1e1e;
 }

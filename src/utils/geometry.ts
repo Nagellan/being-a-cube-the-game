@@ -1,4 +1,4 @@
-import type { Coordinate } from "../types/positioned";
+import type { Coordinate } from '../types/positioned';
 
 /**
  * Получить координату X относительно центра матрицы
@@ -7,7 +7,7 @@ import type { Coordinate } from "../types/positioned";
  * @param size   радиус матрицы
  */
 export const getX = (xIndex: number, size: number): Coordinate =>
-  xIndex - Math.floor(size / 2);
+	xIndex - Math.floor(size / 2);
 
 /**
  * Получить координату Y относительно центра матрицы
@@ -16,7 +16,7 @@ export const getX = (xIndex: number, size: number): Coordinate =>
  * @param size   радиус матрицы
  */
 export const getY = (yIndex: number, size: number): Coordinate =>
-  Math.floor(size / 2) - yIndex;
+	Math.floor(size / 2) - yIndex;
 
 /**
  * Получить координату X относительно левого-верхнего угла матрицы
@@ -25,7 +25,7 @@ export const getY = (yIndex: number, size: number): Coordinate =>
  * @param size радиус матрицы
  */
 export const getXIndex = (x: Coordinate, size: number): number =>
-  Math.floor(size / 2) + x;
+	Math.floor(size / 2) + x;
 
 /**
  * Получить координату Y относительно левого-верхнего угла матрицы
@@ -34,7 +34,7 @@ export const getXIndex = (x: Coordinate, size: number): number =>
  * @param size радиус матрицы
  */
 export const getYIndex = (y: Coordinate, size: number): number =>
-  Math.floor(size / 2) - y;
+	Math.floor(size / 2) - y;
 
 /**
  * Степень уменьшения порога вхождения точки в окружность
@@ -55,14 +55,14 @@ const BEAUTY_COEFFICIENT = 0.6;
  * @param thresholdReduction степень уменьшения порога вхождения точки в окружность
  */
 export const getIsPointInsideCircle = (
-  xp: number,
-  yp: number,
-  xc: number,
-  yc: number,
-  r: number,
-  thresholdReduction = BEAUTY_COEFFICIENT,
+	xp: number,
+	yp: number,
+	xc: number,
+	yc: number,
+	r: number,
+	thresholdReduction = BEAUTY_COEFFICIENT,
 ) => {
-  const d = Math.sqrt(Math.pow(xp - xc, 2) + Math.pow(yp - yc, 2));
+	const d = Math.sqrt(Math.pow(xp - xc, 2) + Math.pow(yp - yc, 2));
 
-  return Math.pow(d - thresholdReduction, 2) <= Math.pow(r, 2);
+	return Math.pow(d - thresholdReduction, 2) <= Math.pow(r, 2);
 };
