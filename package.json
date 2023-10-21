@@ -4,7 +4,8 @@
   "type": "module",
   "devDependencies": {
     "@types/react-dom": "^18.2.7",
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "prettier": "^3.0.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
