@@ -37,10 +37,7 @@ body {
 .map .__cell {
 	border-radius: var(--cell-border-radius);
 
-	color: black;
-	transition:
-		background-color 500ms ease-out,
-		color 250ms ease-out;
+	transition: background-color 500ms ease-out;
 
 	display: flex;
 	align-items: center;
@@ -49,7 +46,6 @@ body {
 
 .map .__cell.__cell--blank {
 	background-color: white;
-	color: transparent;
 }
 
 .map .__cell.__cell--grass {
@@ -64,6 +60,29 @@ body {
 	background-color: #c4e2fc;
 }
 
+.map .__cell .__item {
+	opacity: 1;
+}
+
+.map .__cell .__item.__item--enter {
+	opacity: 0;
+}
+
+.map .__cell .__item.__item--enter-active,
+.map .__cell .__item.__item--exit-active {
+	transition: opacity 250ms ease-out;
+}
+
+.map .__cell .__item.__item--enter-active,
+.map .__cell .__item.__item--enter-done {
+	opacity: 1;
+}
+
+.map .__cell .__item.__item--exit-active,
+.map .__cell .__item.__item--exit-done {
+	opacity: 0;
+}
+
 .cube {
 	height: var(--cell-size);
 	width: var(--cell-size);
@@ -72,4 +91,8 @@ body {
 	position: absolute;
 
 	background-color: #1e1e1e;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

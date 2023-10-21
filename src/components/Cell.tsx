@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import { useGame } from '../hooks/useGame';
 import { ITEM } from '../constants/item';
@@ -8,7 +9,7 @@ import type { Item } from '../types/item';
 const getItem = (item: Item | null) => {
 	switch (item) {
 		case ITEM.STICK: {
-			return '🦯';
+			return '🌿';
 		}
 		case ITEM.STONE: {
 			return '🪨';
@@ -16,8 +17,9 @@ const getItem = (item: Item | null) => {
 		case ITEM.FISH: {
 			return '🐟';
 		}
-		default:
+		default: {
 			break;
+		}
 	}
 };
 
@@ -38,18 +40,27 @@ type Props = {
 };
 
 export const Cell = ({ id }: Props) => {
+	const nodeRef = useRef(null);
+
 	const { getCell, cube } = useGame();
 
 	const cell = useMemo(() => getCell(id), [id]);
+	const visible = cube.fov.includes(...cell.position);
 
 	return (
-		<div
-			className={getClassName(
-				cell.type,
-				cube.fov.includes(...cell.position),
-			)}
-		>
-			{getItem(cell.item)}
+		<div className={getClassName(cell.type, visible)}>
+			<CSSTransition
+				in={visible}
+				nodeRef={nodeRef}
+				timeout={250}
+				classNames="__item-"
+				mountOnEnter
+				unmountOnExit
+			>
+				<div ref={nodeRef} className="__item">
+					{getItem(cell.item)}
+				</div>
+			</CSSTransition>
 		</div>
 	);
 };
