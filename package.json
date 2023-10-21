@@ -17,6 +17,10 @@
   "scripts": {
     "build": "bun ./scripts/build.ts",
     "start": "bun ./scripts/start.ts",
-    "server": "bun ./scripts/server"
+    "server": "bun ./scripts/server",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
