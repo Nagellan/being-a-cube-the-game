@@ -2,10 +2,73 @@
 	--cell-size: 40px;
 	--map-gap: 4px;
 	--cell-border-radius: 4px;
+	--tooltip-bg-color: white;
+	--tooltip-border: 3px dashed #dddddd;
 }
 
 body {
 	margin: 0;
+}
+
+.tooltip {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	position: absolute;
+
+	padding: 12px 20px;
+	border-radius: 12px;
+	border: var(--tooltip-border);
+
+	background-color: var(--tooltip-bg-color);
+
+	opacity: 1;
+	bottom: calc(100% + 12px);
+}
+
+.tooltip.tooltip--enter {
+	opacity: 0;
+	bottom: calc(100% + 8px);
+}
+
+.tooltip.tooltip--enter-active,
+.tooltip.tooltip--exit-active {
+	transition:
+		opacity var(--delay) ease-out,
+		bottom var(--delay) ease-out;
+}
+
+.tooltip.tooltip--enter-active,
+.tooltip.tooltip--enter-done {
+	opacity: 1;
+	bottom: calc(100% + 12px);
+}
+
+.tooltip.tooltip--exit-active,
+.tooltip.tooltip--exit-done {
+	opacity: 0;
+	bottom: calc(100% + 8px);
+}
+
+.tooltip::after {
+	content: '';
+	height: 12px;
+	width: 12px;
+
+	display: flex;
+
+	transform: rotate(-45deg);
+	border-radius: 4px;
+	border: var(--tooltip-border);
+	border-top-color: transparent;
+	border-right-color: transparent;
+
+	position: absolute;
+	bottom: -8px;
+
+	background-color: var(--tooltip-bg-color);
 }
 
 .game {

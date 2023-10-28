@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+import type { Ref } from 'react';
 
-export const Cube = () => {
-	return <div className="cube">👀</div>;
-};
+type Props = Record<string, never>;
+
+export const Cube = forwardRef(function Cube(
+	props: Props,
+	ref: Ref<HTMLDivElement>,
+) {
+	return (
+		<div className="cube" ref={ref}>
+			👀
+		</div>
+	);
+});

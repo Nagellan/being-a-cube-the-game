@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import { Positioned } from './Positioned';
 import type { Coordinate } from '../types/positioned';
 
@@ -16,7 +18,7 @@ export abstract class Creature extends Positioned {
 	/**
 	 * Реакция на движение кубика
 	 */
-	private moveListener: MoveListener | undefined;
+	private moveListener: Record<string, MoveListener> = {};
 
 	/**
 	 * Мёртво ли существо
@@ -31,7 +33,9 @@ export abstract class Creature extends Positioned {
 	move(x: Coordinate, y: Coordinate): void {
 		this.setPosition(x, y);
 
-		this.moveListener?.(x, y);
+		for (const id in this.moveListener) {
+			this.moveListener[id](x, y);
+		}
 	}
 
 	/**
@@ -65,14 +69,18 @@ export abstract class Creature extends Positioned {
 	/**
 	 * Установить реакцию на движение кубика
 	 */
-	listenToMove(moveListener: MoveListener) {
-		this.moveListener = moveListener;
+	listenToMove(moveListener: MoveListener): string {
+		const id = nanoid();
+
+		this.moveListener[id] = moveListener;
+
+		return id;
 	}
 
 	/**
 	 * Убрать реакцию на движение кубика
 	 */
-	stopListenToMove() {
-		this.moveListener = undefined;
+	stopListenToMove(id: string): void {
+		delete this.moveListener[id];
 	}
 }

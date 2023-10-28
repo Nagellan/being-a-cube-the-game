@@ -42,7 +42,7 @@ type Props = {
 };
 
 export const Cell = ({ id }: Props) => {
-	const nodeRef = useRef(null);
+	const nodeRef = useRef<HTMLDivElement>(null);
 
 	const { getCell, cube } = useGame();
 

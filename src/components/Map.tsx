@@ -17,12 +17,12 @@ export const Map = () => {
 	const [position, setPosition] = useState(cube.position);
 
 	useEffect(() => {
-		cube.listenToMove((x, y) => {
+		const id = cube.listenToMove((x, y) => {
 			setPosition([x, y]);
 		});
 
 		return () => {
-			cube.stopListenToMove();
+			cube.stopListenToMove(id);
 		};
 	}, []);
 
