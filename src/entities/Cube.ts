@@ -58,6 +58,23 @@ export class Cube extends Creature {
 	}
 
 	/**
+	 * Взаимодействовать с клеткой, на которой кубик стоит
+	 */
+	interact() {
+		const cell = this.fov.getCell(...this.position);
+
+		if (!cell.interactive) {
+			throw new Error(
+				`Нельзя взаимодействовать с клеткой: (${cell.x}, ${cell.y})`,
+			);
+		}
+
+		const item = cell.interact();
+
+		this.addToInventory(item, 1);
+	}
+
+	/**
 	 * Добавить некоторое количество предмета в инвентарь
 	 */
 	addToInventory(item: Item, amount: number): void {

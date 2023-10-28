@@ -109,6 +109,11 @@ export class Game {
 					this.cube.moveLeft();
 					break;
 
+				// Взаимодействие с предметом на клетке
+				case 'KeyF':
+					this.cube.interact();
+					break;
+
 				default:
 					// игнорируем нажатия на любые другие клавиши
 					break;

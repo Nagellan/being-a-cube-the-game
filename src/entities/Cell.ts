@@ -84,20 +84,30 @@ export abstract class Cell extends Positioned {
 	/**
 	 * Убрать предмет с клетки
 	 */
-	resetItem(): void {
+	resetItem(): Item {
+		const item = this.item;
+
+		if (item === null) {
+			throw new Error(
+				`Нельзя убрать с клетки предмет, которого там нет (${this.type} ${this.x}, ${this.y})`,
+			);
+		}
+
 		this.item = null;
+
+		return item;
 	}
 
 	/**
 	 * Взаимодействовать с клеткой
 	 */
-	interact(): void {
-		if (this.interactive) {
-			return this.resetItem();
+	interact(): Item {
+		if (!this.interactive) {
+			throw new Error(
+				`Нельзя взаимодействовать с клеткой: (${this.type} ${this.x}, ${this.y})`,
+			);
 		}
 
-		throw new Error(
-			`Клетка ${this.type} [${this.x}, ${this.y}] неинтерактивная`,
-		);
+		return this.resetItem();
 	}
 }
