@@ -10,6 +10,18 @@ body {
 	margin: 0;
 }
 
+.floater {
+	position: absolute;
+	top: calc(
+		var(--anchor-top, -9999px) - var(--floater-height, 0px) -
+			var(--floater-gap, 0px)
+	);
+	left: calc(
+		var(--anchor-left, -9999px) + var(--anchor-width, 0px) / 2 -
+			var(--floater-width, 0px) / 2
+	);
+}
+
 .tooltip {
 	display: flex;
 	flex-direction: row;
