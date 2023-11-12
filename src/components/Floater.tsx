@@ -8,6 +8,8 @@ import React, {
 import type { PropsWithChildren, ReactNode, ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 
+import { mergeRefs } from '../utils/react';
+
 type AnchorPositionData = {
 	top: number;
 	left: number;
@@ -101,17 +103,20 @@ export const Floater = ({ children, content }: Props) => {
 		setAnchorPositionData({ top, left, width });
 	}, []);
 
-	const onRef = useCallback((node: HTMLElement | null) => {
-		anchorRef.current = node;
+	const onRef = useCallback(
+		(node: HTMLElement | null) => {
+			mergeRefs([anchorRef, children.props.ref], node);
 
-		onAnchorChange();
+			onAnchorChange();
 
-		if (node) {
-			resizeObserver.current.observe(node);
-		} else {
-			resizeObserver.current.disconnect();
-		}
-	}, []);
+			if (node) {
+				resizeObserver.current.observe(node);
+			} else {
+				resizeObserver.current.disconnect();
+			}
+		},
+		[children.props.ref],
+	);
 
 	useEffect(() => {
 		window.addEventListener('scroll', onAnchorChange);
