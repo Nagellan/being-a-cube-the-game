@@ -1,8 +1,16 @@
+import { nanoid } from 'nanoid';
+
 import { Cube } from './Cube';
 import { FOV } from './FOV';
 import { Fear } from './Fear';
 import { Map } from './Map';
+import { GAME_EVENT } from '../constants/game';
 import type { Position } from '../types/positioned';
+import type {
+	GameEventListener,
+	GameEventListenerPayload,
+} from '../types/game';
+import type { Noop } from '../types/helpers';
 
 export class Game {
 	/**
@@ -14,6 +22,11 @@ export class Game {
 	 * Время начала игры (от 0 до 23)
 	 */
 	private startTime: number;
+
+	/**
+	 * Реакция на игровое событие
+	 */
+	private eventListeners: Record<string, GameEventListener>;
 
 	/**
 	 * Карта мира
@@ -46,6 +59,7 @@ export class Game {
 		this.fears = [];
 
 		this.lifetimeTimer = null;
+		this.eventListeners = {};
 	}
 
 	/**
@@ -92,26 +106,46 @@ export class Game {
 				// Ход вверх
 				case 'KeyW':
 					this.cube.moveUp();
+					this.callEventListeners({
+						event: GAME_EVENT.MOVE,
+						target: this.cube,
+					});
 					break;
 
 				// Ход вниз
 				case 'KeyS':
 					this.cube.moveDown();
+					this.callEventListeners({
+						event: GAME_EVENT.MOVE,
+						target: this.cube,
+					});
 					break;
 
 				// Ход вправо
 				case 'KeyD':
 					this.cube.moveRight();
+					this.callEventListeners({
+						event: GAME_EVENT.MOVE,
+						target: this.cube,
+					});
 					break;
 
 				// Ход влево
 				case 'KeyA':
 					this.cube.moveLeft();
+					this.callEventListeners({
+						event: GAME_EVENT.MOVE,
+						target: this.cube,
+					});
 					break;
 
 				// Взаимодействие с предметом на клетке
 				case 'KeyF':
 					this.cube.interact();
+					this.callEventListeners({
+						event: GAME_EVENT.ACTION,
+						target: this.cube,
+					});
 					break;
 
 				default:
@@ -124,6 +158,36 @@ export class Game {
 	};
 
 	/**
+	 * Подписаться на игровые события
+	 * Возвращает функцию отписки слушателя от игровых событий
+	 */
+	subscribeToEvents(listener: GameEventListener): Noop {
+		const id = nanoid();
+
+		this.eventListeners[id] = listener;
+
+		return () => {
+			delete this.eventListeners[id];
+		};
+	}
+
+	/**
+	 * Вызвать всех подписчиков
+	 */
+	private callEventListeners(payload: GameEventListenerPayload): void {
+		Object.values(this.eventListeners).forEach((listener) => {
+			listener(payload);
+		});
+	}
+
+	/**
+	 * Отписать всех подписчиков
+	 */
+	private removeEventListeners(): void {
+		this.eventListeners = {};
+	}
+
+	/**
 	 * Запустить мир
 	 */
 	start(): void {
@@ -131,6 +195,11 @@ export class Game {
 		this.lifetimeTimer = setInterval(
 			() => {
 				this.lifetime += 1;
+
+				this.callEventListeners({
+					event: GAME_EVENT.CLOCK,
+					target: this,
+				});
 			},
 			5 * 60 * 1000,
 		);

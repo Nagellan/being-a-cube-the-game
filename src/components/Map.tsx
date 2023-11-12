@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { useGame } from '../hooks/useGame';
 import { Cell } from './Cell';
@@ -14,20 +14,8 @@ const getStyle = ([x, y]: Position, size: number) => ({
 export const Map = () => {
 	const { map, cube } = useGame();
 
-	const [position, setPosition] = useState(cube.position);
-
-	useEffect(() => {
-		const id = cube.listenToMove((x, y) => {
-			setPosition([x, y]);
-		});
-
-		return () => {
-			cube.stopListenToMove(id);
-		};
-	}, []);
-
 	return (
-		<div className="map" style={getStyle(position, map.size)}>
+		<div className="map" style={getStyle(cube.position, map.size)}>
 			{map.data.map((row) =>
 				row.map((cell) => {
 					return <Cell key={cell.id} id={cell.id} />;

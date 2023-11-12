@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { ReactElement } from 'react';
 
 import { useGame } from '../hooks/useGame';
@@ -11,20 +11,7 @@ type Props = {
 export const ActionTooltip = ({ children }: Props) => {
 	const { cube } = useGame();
 
-	const [position, setPosition] = useState(cube.position);
-
-	// TODO: вынести в useGame
-	useEffect(() => {
-		const id = cube.listenToMove((x, y) => {
-			setPosition([x, y]);
-		});
-
-		return () => {
-			cube.stopListenToMove(id);
-		};
-	}, []);
-
-	const cell = cube.fov.getCell(...position);
+	const cell = cube.fov.getCell(...cube.position);
 
 	return (
 		<Tooltip
