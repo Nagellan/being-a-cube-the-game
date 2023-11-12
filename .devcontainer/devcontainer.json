@@ -19,16 +19,7 @@
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
-			"extensions": [
-				"ms-vscode-remote.remote-containers",
-				"GitHub.remotehub",
-				"ms-azuretools.vscode-docker",
-				"EditorConfig.EditorConfig",
-				"dbaeumer.vscode-eslint",
-				"GitHub.vscode-pull-request-github",
-				"eamodio.gitlens",
-				"esbenp.prettier-vscode"
-			]
+			"extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
 		}
 	},
 
