@@ -1,5 +1,6 @@
 import React, {
 	useRef,
+	useMemo,
 	useState,
 	useEffect,
 	useCallback,
@@ -14,16 +15,19 @@ type AnchorPositionData = {
 	top: number;
 	left: number;
 	width: number;
-	gap?: number;
 };
 
-const FloaterContent = ({
+type FloaterContentWrapperProps = PropsWithChildren<
+	AnchorPositionData & { gap?: number }
+>;
+
+const FloaterContentWrapper = ({
 	children,
 	top: anchorTop,
 	left: anchorLeft,
 	width: anchorWidth,
 	gap = 0,
-}: PropsWithChildren<AnchorPositionData>) => {
+}: FloaterContentWrapperProps) => {
 	const [size, setSize] = useState<{ height: number; width: number } | null>(
 		null,
 	);
@@ -37,7 +41,7 @@ const FloaterContent = ({
 		}),
 	);
 
-	const onRef = useCallback((node: HTMLDivElement | null) => {
+	const setRef = useCallback((node: HTMLDivElement | null) => {
 		if (node) {
 			resizeObserver.current.observe(node);
 		} else {
@@ -45,29 +49,23 @@ const FloaterContent = ({
 		}
 	}, []);
 
-	useEffect(() => {
-		return () => {
-			resizeObserver.current.disconnect();
-		};
-	}, []);
+	const style = useMemo(() => {
+		if (size) {
+			return {
+				'--anchor-top': `${anchorTop}px`,
+				'--anchor-left': `${anchorLeft}px`,
+				'--anchor-width': `${anchorWidth}px`,
+				'--floater-height': `${size.height}px`,
+				'--floater-width': `${size.width}px`,
+				'--floater-gap': `${gap}px`,
+			};
+		}
+
+		return undefined;
+	}, [anchorTop, anchorLeft, anchorWidth, size?.height, size?.width, gap]);
 
 	return (
-		<div
-			className="floater"
-			style={
-				size
-					? {
-							'--anchor-top': `${anchorTop}px`,
-							'--anchor-left': `${anchorLeft}px`,
-							'--anchor-width': `${anchorWidth}px`,
-							'--floater-height': `${size.height}px`,
-							'--floater-width': `${size.width}px`,
-							'--floater-gap': `${gap}px`,
-					  }
-					: {}
-			}
-			ref={onRef}
-		>
+		<div className="floater" style={style} ref={setRef}>
 			{children}
 		</div>
 	);
@@ -76,17 +74,19 @@ const FloaterContent = ({
 type Props = {
 	children: ReactElement;
 	content?: ReactNode;
+	gap?: number;
 };
 
 /**
  * Важно! Для работы компонента необходимо,
  * чтобы у children был использован forwardRef!
  */
-export const Floater = ({ children, content }: Props) => {
+export const Floater = ({ children, content, gap = 0 }: Props) => {
 	const [anchorPositionData, setAnchorPositionData] =
 		useState<AnchorPositionData | null>(null);
 
 	const anchorRef = useRef<HTMLElement | null>(null);
+	// обновляем позицию флоатера при изменении размеров якоря
 	const resizeObserver = useRef<ResizeObserver>(
 		new ResizeObserver(([entry]) => {
 			const { top, left, width } = entry.target.getBoundingClientRect();
@@ -95,7 +95,7 @@ export const Floater = ({ children, content }: Props) => {
 		}),
 	);
 
-	const onAnchorChange = useCallback(() => {
+	const updatePosition = useCallback(() => {
 		if (!anchorRef.current) return;
 
 		const { top, left, width } = anchorRef.current.getBoundingClientRect();
@@ -103,11 +103,11 @@ export const Floater = ({ children, content }: Props) => {
 		setAnchorPositionData({ top, left, width });
 	}, []);
 
-	const onRef = useCallback(
+	const setAnchorRef = useCallback(
 		(node: HTMLElement | null) => {
 			mergeRefs([anchorRef, children.props.ref], node);
 
-			onAnchorChange();
+			updatePosition();
 
 			if (node) {
 				resizeObserver.current.observe(node);
@@ -119,25 +119,23 @@ export const Floater = ({ children, content }: Props) => {
 	);
 
 	useEffect(() => {
-		window.addEventListener('scroll', onAnchorChange);
-		window.addEventListener('resize', onAnchorChange);
+		window.addEventListener('scroll', updatePosition);
+		window.addEventListener('resize', updatePosition);
 
 		return () => {
-			window.removeEventListener('scroll', onAnchorChange);
-			window.removeEventListener('resize', onAnchorChange);
+			window.removeEventListener('scroll', updatePosition);
+			window.removeEventListener('resize', updatePosition);
 		};
 	});
 
 	return (
 		<>
-			{cloneElement(children, {
-				ref: onRef,
-			})}
+			{cloneElement(children, { ref: setAnchorRef })}
 			{anchorPositionData &&
 				createPortal(
-					<FloaterContent {...anchorPositionData}>
+					<FloaterContentWrapper {...anchorPositionData} gap={gap}>
 						{content}
-					</FloaterContent>,
+					</FloaterContentWrapper>,
 					document.body,
 				)}
 		</>

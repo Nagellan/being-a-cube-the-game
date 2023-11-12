@@ -28,40 +28,39 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	position: absolute;
-
 	padding: 12px 20px;
 	border-radius: 12px;
 	border: var(--tooltip-border);
+	margin-bottom: 7px; /* пространство для хвостика */
 
 	background-color: var(--tooltip-bg-color);
 
 	opacity: 1;
-	bottom: calc(100% + 12px);
+	transform: translateY(-4px);
 }
 
 .tooltip.tooltip--enter {
 	opacity: 0;
-	bottom: calc(100% + 8px);
+	transform: translateY(0);
 }
 
 .tooltip.tooltip--enter-active,
 .tooltip.tooltip--exit-active {
 	transition:
 		opacity var(--delay) ease-out,
-		bottom var(--delay) ease-out;
+		transform var(--delay) ease-out;
 }
 
 .tooltip.tooltip--enter-active,
 .tooltip.tooltip--enter-done {
 	opacity: 1;
-	bottom: calc(100% + 12px);
+	transform: translateY(-4px);
 }
 
 .tooltip.tooltip--exit-active,
 .tooltip.tooltip--exit-done {
 	opacity: 0;
-	bottom: calc(100% + 8px);
+	transform: translateY(0);
 }
 
 .tooltip::after {

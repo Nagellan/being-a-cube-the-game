@@ -1,9 +1,36 @@
-import React, { useState, useRef, cloneElement } from 'react';
-import type { ReactNode, ReactElement } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useRef } from 'react';
+import type { ReactNode, ReactElement, PropsWithChildren } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import { Floater } from './Floater';
+
 const TIMEOUT = 100;
+
+const TooltipContentWrapper = ({
+	active,
+	children,
+}: PropsWithChildren<{ active: boolean }>) => {
+	const ref = useRef<HTMLDivElement>(null);
+
+	return (
+		<CSSTransition
+			in={active}
+			nodeRef={ref}
+			timeout={TIMEOUT}
+			classNames="tooltip-"
+			mountOnEnter
+			unmountOnExit
+		>
+			<div
+				ref={ref}
+				className="tooltip"
+				style={{ '--delay': `${TIMEOUT}ms` }}
+			>
+				{children}
+			</div>
+		</CSSTransition>
+	);
+};
 
 type Props = {
 	children: ReactElement;
@@ -12,32 +39,15 @@ type Props = {
 };
 
 export const Tooltip = ({ children, content, active = false }: Props) => {
-	const ref = useRef<HTMLDivElement>(null);
-	const [node, setNode] = useState<HTMLElement | null>(null);
-
 	return (
-		<>
-			{cloneElement(children, { ref: setNode })}
-			{node !== null &&
-				createPortal(
-					<CSSTransition
-						in={active}
-						nodeRef={ref}
-						timeout={TIMEOUT}
-						classNames="tooltip-"
-						mountOnEnter
-						unmountOnExit
-					>
-						<div
-							ref={ref}
-							className="tooltip"
-							style={{ '--delay': `${TIMEOUT}ms` }}
-						>
-							{content}
-						</div>
-					</CSSTransition>,
-					node,
-				)}
-		</>
+		<Floater
+			content={
+				<TooltipContentWrapper active={active}>
+					{content}
+				</TooltipContentWrapper>
+			}
+		>
+			{children}
+		</Floater>
 	);
 };
