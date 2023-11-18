@@ -5,6 +5,21 @@ import type { Values } from './helpers';
 
 export type GameEvent = Values<typeof GAME_EVENT>;
 
+type GameStartEventListenerPayload = {
+	event: typeof GAME_EVENT.START;
+	target: Game;
+};
+
+type GameStopEventListenerPayload = {
+	event: typeof GAME_EVENT.STOP;
+	target: Game;
+};
+
+type GameClockEventListenerPayload = {
+	event: typeof GAME_EVENT.CLOCK;
+	target: Game;
+};
+
 type GameMoveEventListenerPayload = {
 	event: typeof GAME_EVENT.MOVE;
 	target: Creature;
@@ -15,14 +30,11 @@ type GameActionEventListenerPayload = {
 	target: Creature;
 };
 
-type GameClockEventListenerPayload = {
-	event: typeof GAME_EVENT.CLOCK;
-	target: Game;
-};
-
 export type GameEventListenerPayload =
+	| GameStartEventListenerPayload
+	| GameStopEventListenerPayload
+	| GameClockEventListenerPayload
 	| GameMoveEventListenerPayload
-	| GameActionEventListenerPayload
-	| GameClockEventListenerPayload;
+	| GameActionEventListenerPayload;
 
 export type GameEventListener = (payload: GameEventListenerPayload) => void;

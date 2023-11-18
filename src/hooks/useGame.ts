@@ -10,6 +10,7 @@ import type { GameEvent } from '../types/game';
 export const useGame = () => {
 	const game = useContext(GameContext);
 
+	// Используется для ре-рендера компонента
 	const [, setEvents] = useState<GameEvent[]>([]);
 
 	useEffect(() => {

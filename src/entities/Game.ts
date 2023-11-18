@@ -7,6 +7,7 @@ import { Map } from './Map';
 import { GAME_EVENT } from '../constants/game';
 import type { Position } from '../types/positioned';
 import type {
+	GameEvent,
 	GameEventListener,
 	GameEventListenerPayload,
 } from '../types/game';
@@ -27,6 +28,11 @@ export class Game {
 	 * Реакция на игровое событие
 	 */
 	private eventListeners: Record<string, GameEventListener>;
+
+	/**
+	 * Список игровых событий
+	 */
+	private events: GameEvent[];
 
 	/**
 	 * Карта мира
@@ -60,6 +66,7 @@ export class Game {
 
 		this.lifetimeTimer = null;
 		this.eventListeners = {};
+		this.events = [];
 	}
 
 	/**
@@ -95,6 +102,13 @@ export class Game {
 	 */
 	get isNight(): boolean {
 		return this.time < 6;
+	}
+
+	/**
+	 * Получить список игровых событий
+	 */
+	getEvents(): GameEvent[] {
+		return this.events;
 	}
 
 	/**
@@ -175,6 +189,8 @@ export class Game {
 	 * Вызвать всех подписчиков
 	 */
 	private callEventListeners(payload: GameEventListenerPayload): void {
+		this.events.push(payload.event);
+
 		Object.values(this.eventListeners).forEach((listener) => {
 			listener(payload);
 		});
@@ -206,6 +222,8 @@ export class Game {
 
 		// Запуск отслеживания действий игрока
 		window.addEventListener('keydown', this.onKeyDown);
+
+		this.callEventListeners({ event: GAME_EVENT.START, target: this });
 	}
 
 	/**
@@ -220,5 +238,7 @@ export class Game {
 
 		// Остановка отслеживания действий игрока
 		window.removeEventListener('keydown', this.onKeyDown);
+
+		this.callEventListeners({ event: GAME_EVENT.STOP, target: this });
 	}
 }

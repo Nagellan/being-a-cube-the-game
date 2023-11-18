@@ -3,6 +3,18 @@
  */
 export const GAME_EVENT = {
 	/**
+	 * Старт игры
+	 */
+	START: 'START',
+	/**
+	 * Остановка игры
+	 */
+	STOP: 'STOP',
+	/**
+	 * Изменение игрового времени
+	 */
+	CLOCK: 'CLOCK',
+	/**
 	 * Движение существа
 	 */
 	MOVE: 'MOVE',
@@ -10,8 +22,4 @@ export const GAME_EVENT = {
 	 * Действие существа
 	 */
 	ACTION: 'ACTION',
-	/**
-	 * Изменение игрового времени
-	 */
-	CLOCK: 'CLOCK',
 } as const;
