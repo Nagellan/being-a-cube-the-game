@@ -8,6 +8,7 @@
 
 body {
 	margin: 0;
+	font-family: sans-serif;
 }
 
 .floater {
@@ -28,8 +29,8 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	padding: 12px 20px;
-	border-radius: 12px;
+	padding: 8px 20px;
+	border-radius: 24px;
 	border: var(--tooltip-border);
 	margin-bottom: 7px; /* пространство для хвостика */
 
@@ -82,6 +83,18 @@ body {
 	background-color: var(--tooltip-bg-color);
 }
 
+.tooltip.action-tooltip .__press-key {
+	height: var(--cell-size);
+	width: var(--cell-size);
+
+	border-radius: 16px;
+	background-color: #e6e6e6;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .game {
 	display: flex;
 	align-items: center;
@@ -106,9 +119,18 @@ body {
 	transition:
 		top 100ms ease-out,
 		left 100ms ease-out;
+
+	left: calc(
+		var(--cube-position-x) * -1 * (var(--cell-size) + var(--map-gap))
+	);
+	top: calc(var(--cube-position-y) * (var(--cell-size) + var(--map-gap)));
+	grid-template-columns: repeat(var(--map-size), var(--cell-size));
+	grid-template-rows: repeat(var(--map-size), var(--cell-size));
 }
 
-.map .__cell {
+.__cell {
+	height: var(--cell-size);
+	width: var(--cell-size);
 	border-radius: var(--cell-border-radius);
 
 	transition: background-color 500ms ease-out;
@@ -118,42 +140,42 @@ body {
 	justify-content: center;
 }
 
-.map .__cell.__cell--blank {
+.__cell.__cell--blank {
 	background-color: white;
 }
 
-.map .__cell.__cell--grass {
+.__cell.__cell--grass {
 	background-color: #bef2c9;
 }
 
-.map .__cell.__cell--sand {
+.__cell.__cell--sand {
 	background-color: #fbe9ab;
 }
 
-.map .__cell.__cell--water {
+.__cell.__cell--water {
 	background-color: #c4e2fc;
 }
 
-.map .__cell .__item {
+.__cell .__item {
 	opacity: 1;
 }
 
-.map .__cell .__item.__item--enter {
+.__cell .__item.__item--enter {
 	opacity: 0;
 }
 
-.map .__cell .__item.__item--enter-active,
-.map .__cell .__item.__item--exit-active {
+.__cell .__item.__item--enter-active,
+.__cell .__item.__item--exit-active {
 	transition: opacity var(--delay) ease-out;
 }
 
-.map .__cell .__item.__item--enter-active,
-.map .__cell .__item.__item--enter-done {
+.__cell .__item.__item--enter-active,
+.__cell .__item.__item--enter-done {
 	opacity: 1;
 }
 
-.map .__cell .__item.__item--exit-active,
-.map .__cell .__item.__item--exit-done {
+.__cell .__item.__item--exit-active,
+.__cell .__item.__item--exit-done {
 	opacity: 0;
 }
 

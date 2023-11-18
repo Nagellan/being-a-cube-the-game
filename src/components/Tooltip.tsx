@@ -4,12 +4,13 @@ import { CSSTransition } from 'react-transition-group';
 
 import { Floater } from './Floater';
 
-const TIMEOUT = 100;
+export const TIMEOUT = 100;
 
 const TooltipContentWrapper = ({
 	active,
+	className,
 	children,
-}: PropsWithChildren<{ active: boolean }>) => {
+}: PropsWithChildren<{ active: boolean; className?: string }>) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	return (
@@ -23,7 +24,7 @@ const TooltipContentWrapper = ({
 		>
 			<div
 				ref={ref}
-				className="tooltip"
+				className={`tooltip ${className ?? ''}`}
 				style={{ '--delay': `${TIMEOUT}ms` }}
 			>
 				{children}
@@ -35,14 +36,20 @@ const TooltipContentWrapper = ({
 type Props = {
 	children: ReactElement;
 	content: ReactNode;
+	className?: string;
 	active?: boolean;
 };
 
-export const Tooltip = ({ children, content, active = false }: Props) => {
+export const Tooltip = ({
+	children,
+	content,
+	className,
+	active = false,
+}: Props) => {
 	return (
 		<Floater
 			content={
-				<TooltipContentWrapper active={active}>
+				<TooltipContentWrapper active={active} className={className}>
 					{content}
 				</TooltipContentWrapper>
 			}

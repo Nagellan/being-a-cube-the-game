@@ -5,10 +5,9 @@ import { Cell } from './Cell';
 import type { Position } from '../types/positioned';
 
 const getStyle = ([x, y]: Position, size: number) => ({
-	left: `calc(${x} * -1 * (var(--cell-size) + var(--map-gap)))`,
-	top: `calc(${y} * (var(--cell-size) + var(--map-gap)))`,
-	gridTemplateColumns: `repeat(${size}, var(--cell-size))`,
-	gridTemplateRows: `repeat(${size}, var(--cell-size))`,
+	'--cube-position-x': x,
+	'--cube-position-y': y,
+	'--map-size': size,
 });
 
 export const Map = () => {
