@@ -53,6 +53,7 @@ export const Tooltip = ({
 					{content}
 				</TooltipContentWrapper>
 			}
+			gap={4}
 		>
 			{children}
 		</Floater>

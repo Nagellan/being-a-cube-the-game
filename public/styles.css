@@ -37,12 +37,12 @@ body {
 	background-color: var(--tooltip-bg-color);
 
 	opacity: 1;
-	transform: translateY(-4px);
+	transform: translateY(0px);
 }
 
 .tooltip.tooltip--enter {
 	opacity: 0;
-	transform: translateY(0);
+	transform: translateY(4px);
 }
 
 .tooltip.tooltip--enter-active,
@@ -55,13 +55,13 @@ body {
 .tooltip.tooltip--enter-active,
 .tooltip.tooltip--enter-done {
 	opacity: 1;
-	transform: translateY(-4px);
+	transform: translateY(0px);
 }
 
 .tooltip.tooltip--exit-active,
 .tooltip.tooltip--exit-done {
 	opacity: 0;
-	transform: translateY(0);
+	transform: translateY(4px);
 }
 
 .tooltip::after {
@@ -191,4 +191,73 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.inventory {
+	position: absolute;
+	bottom: 8px;
+
+	background-color: white;
+	border-radius: 16px;
+	border: 3px solid #dddddd;
+	padding: 8px 20px;
+
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	opacity: 1;
+	transform: translateY(0px);
+}
+
+.inventory.inventory--enter {
+	opacity: 0;
+	transform: translateY(4px);
+}
+
+.inventory.inventory--enter-active,
+.inventory.inventory--exit-active {
+	transition:
+		opacity var(--delay) ease-out,
+		transform var(--delay) ease-out;
+}
+
+.inventory.inventory--enter-active,
+.inventory.inventory--enter-done {
+	opacity: 1;
+	transform: translateY(0px);
+}
+
+.inventory.inventory--exit-active,
+.inventory.inventory--exit-done {
+	opacity: 0;
+	transform: translateY(4px);
+}
+
+.inventory .__item {
+	height: var(--cell-size);
+	width: var(--cell-size);
+
+	background-color: #f3f3f3;
+	border-radius: var(--cell-border-radius);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: relative;
+}
+
+.inventory .__item .__count {
+	position: absolute;
+
+	bottom: 2px;
+	right: 2px;
+
+	background-color: white;
+	border-radius: 4px;
+	padding: 2px 4px;
+
+	font-size: 8px;
+	line-height: 8px;
 }

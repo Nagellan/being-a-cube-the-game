@@ -33,6 +33,13 @@ export class Cube extends Creature {
 	}
 
 	/**
+	 * Получить инвентарь
+	 */
+	getInventory(): Inventory {
+		return this.inventory;
+	}
+
+	/**
 	 * Установить позицию сущности на карте: X и Y координаты
 	 */
 	setPosition(x: number, y: number): void {

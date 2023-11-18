@@ -8,7 +8,7 @@ import type { Item } from '../types/item';
 
 const TIMEOUT = 250;
 
-const getItem = (item: Item | null) => {
+export const getItem = (item: Item | null) => {
 	switch (item) {
 		case ITEM.STICK: {
 			return '🌿';
