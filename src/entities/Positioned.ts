@@ -32,4 +32,11 @@ export abstract class Positioned {
 		this.x = x;
 		this.y = y;
 	}
+
+	/**
+	 * Узнать, находится ли сущность на переданной позиции
+	 */
+	hasPosition([x, y]: Position): boolean {
+		return this.x === x && this.y === y;
+	}
 }

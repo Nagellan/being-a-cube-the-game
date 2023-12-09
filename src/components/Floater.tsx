@@ -62,7 +62,7 @@ const FloaterContentWrapper = ({
 		}
 
 		return undefined;
-	}, [anchorTop, anchorLeft, anchorWidth, size?.height, size?.width, gap]);
+	}, [size, anchorTop, anchorLeft, anchorWidth, gap]);
 
 	return (
 		<div className="floater" style={style} ref={setRef}>
@@ -115,7 +115,7 @@ export const Floater = ({ children, content, gap = 0 }: Props) => {
 				resizeObserver.current.disconnect();
 			}
 		},
-		[children.props.ref],
+		[children.props.ref, updatePosition],
 	);
 
 	useEffect(() => {

@@ -29,7 +29,7 @@ export class FOV extends Positioned {
 	 * Получить клетку внутри ФОВа по координатам, если она там имеется
 	 */
 	getCell(x: Coordinate, y: Coordinate): Cell {
-		if (!this.includes(x, y)) {
+		if (!this.includes([x, y])) {
 			throw new Error(
 				`Нельзя получить клетку ФОВа, которая в нём не находится: (${x}, ${y})`,
 			);
@@ -41,14 +41,20 @@ export class FOV extends Positioned {
 	/**
 	 * Установить дальность поля зрения (радиус окружности)
 	 */
-	setRange(range: number) {
+	setRange(range: number): void {
 		this.range = range;
 	}
 
 	/**
 	 * Узнать, находится ли переданная точка в поле зрения (включительно)
 	 */
-	includes(x: Coordinate, y: Coordinate) {
-		return getIsPointInsideCircle(x, y, this.x, this.y, this.range);
+	includes([x, y]: Position, rangeExpansion = 0): boolean {
+		return getIsPointInsideCircle(
+			x,
+			y,
+			this.x,
+			this.y,
+			this.range + rangeExpansion,
+		);
 	}
 }

@@ -13,6 +13,10 @@ const game = new Game();
 export const GameProvider = ({ children }: Props) => {
 	useEffect(() => {
 		game.start();
+
+		return () => {
+			game.stop();
+		};
 	}, []);
 
 	return <GameContext.Provider value={game}>{children}</GameContext.Provider>;

@@ -2,10 +2,13 @@ import React, { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import type { Item } from '../types/item';
+import { useRerender } from '../hooks/useRerender';
+import { GAME_EVENT } from '../constants/game';
 import { useGame } from '../hooks/useGame';
 import { getItem } from './Cell';
 
 const TIMEOUT = 150;
+const RERENDER = [GAME_EVENT.ACTION];
 
 type Items = [Item, number][];
 
@@ -13,6 +16,8 @@ export const Inventory = () => {
 	const nodeRef = useRef<HTMLDivElement>(null);
 
 	const { cube } = useGame();
+
+	useRerender(RERENDER);
 
 	const items = Object.entries(cube.getInventory()) as Items;
 
