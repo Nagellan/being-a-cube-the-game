@@ -8,6 +8,7 @@
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
 		"prettier"
 	],
 	"overrides": [
@@ -26,7 +27,7 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["@typescript-eslint", "react"],
+	"plugins": ["@typescript-eslint", "react", "unused-imports"],
 	"rules": {
 		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"linebreak-style": ["error", "unix"],
