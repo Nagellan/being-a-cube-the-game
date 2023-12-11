@@ -62,7 +62,10 @@ export const Cell = ({ id }: Props) => {
 				case GAME_EVENT.ACTION:
 					return game.cube.hasPosition(_cell.position);
 				case GAME_EVENT.MOVE:
-					return game.cube.fov.includes(_cell.position, 1);
+					return (
+						game.cube.fov.includes(_cell.position, 1) &&
+						!game.cube.fov.includes(_cell.position, -1)
+					);
 				default:
 					return false;
 			}
