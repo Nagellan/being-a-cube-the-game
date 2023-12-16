@@ -1,6 +1,9 @@
 import { Creature } from './Creature';
 import type { Coordinate } from '../types/positioned';
 
+/**
+ * Страх (враг Кубика, отрицательный персонаж, стремящийся убить Кубика)
+ */
 export class Fear extends Creature {
 	/**
 	 * Максимальное здоровье

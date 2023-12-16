@@ -1,18 +1,20 @@
 import { Creature } from './Creature';
+import { Inventory } from './Inventory';
 import type { FOV } from './FOV';
 import type { Coordinate, Position } from '../types/positioned';
-import type { Inventory } from '../types/cube';
-import type { Item } from '../types/item';
 
+/**
+ * Кубик (главный герой игры, управляемый персонаж)
+ */
 export class Cube extends Creature {
 	/**
 	 * Максимальное здоровье
 	 */
-	readonly maxHealth = 100;
+	readonly maxHealth: number;
 	/**
 	 * Текущее здоровье
 	 */
-	protected health;
+	protected health: number;
 
 	/**
 	 * Поле зрения
@@ -22,21 +24,15 @@ export class Cube extends Creature {
 	/**
 	 * Инвентарь
 	 */
-	protected inventory: Inventory;
+	readonly inventory: Inventory;
 
 	constructor([x, y]: Position, fov: FOV) {
 		super(x, y);
 
+		this.maxHealth = 100;
 		this.health = this.maxHealth;
-		this.inventory = {};
+		this.inventory = new Inventory();
 		this.fov = fov;
-	}
-
-	/**
-	 * Получить инвентарь
-	 */
-	getInventory(): Inventory {
-		return this.inventory;
 	}
 
 	/**
@@ -78,26 +74,6 @@ export class Cube extends Creature {
 
 		const item = cell.interact();
 
-		this.addToInventory(item, 1);
-	}
-
-	/**
-	 * Добавить некоторое количество предмета в инвентарь
-	 */
-	addToInventory(item: Item, amount: number): void {
-		if (this.inventory[item]) {
-			this.inventory[item] = this.inventory[item]! + amount;
-		} else {
-			this.inventory[item] = amount;
-		}
-	}
-
-	/**
-	 * Убрать некоторое количество предмета из инвентаря
-	 */
-	removeFromInventory(item: Item, amount: number): void {
-		if (this.inventory[item]) {
-			this.inventory[item] = Math.max(0, this.inventory[item]! - amount);
-		}
+		this.inventory.add(item, 1);
 	}
 }

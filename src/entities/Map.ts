@@ -4,6 +4,9 @@ import { getXIndex, getYIndex } from '../utils/geometry';
 import type { MapData } from '../types/map';
 import type { Coordinate } from '../types/positioned';
 
+/**
+ * Карта
+ */
 export class Map {
 	/**
 	 * Размер карты (значение ширины и высоты) — нечетный

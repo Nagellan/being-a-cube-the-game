@@ -13,6 +13,9 @@ import type {
 } from '../types/game';
 import type { Noop } from '../types/helpers';
 
+/**
+ * Игровой движок
+ */
 export class Game {
 	/**
 	 * Время существования мира (в часах)

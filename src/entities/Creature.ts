@@ -1,6 +1,9 @@
 import { Positioned } from './Positioned';
 import type { Coordinate } from '../types/positioned';
 
+/**
+ * Существо
+ */
 export abstract class Creature extends Positioned {
 	/**
 	 * Максимальное здоровье
