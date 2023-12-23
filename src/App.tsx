@@ -4,7 +4,7 @@ import { Map } from './components/Map';
 import { Cube } from './components/Cube';
 import { ActionTooltip } from './components/ActionTooltip';
 import { GameProvider } from './providers/game';
-import { Inventory } from './components/Inventory';
+import { BottomBar } from './components/BottomBar';
 
 export const App = () => {
 	return (
@@ -16,7 +16,7 @@ export const App = () => {
 					<Cube />
 				</ActionTooltip>
 
-				<Inventory />
+				<BottomBar />
 			</div>
 		</GameProvider>
 	);

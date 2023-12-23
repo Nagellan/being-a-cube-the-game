@@ -193,7 +193,7 @@ body {
 	justify-content: center;
 }
 
-.inventory {
+.bottom-bar {
 	position: absolute;
 	bottom: 8px;
 
@@ -202,36 +202,38 @@ body {
 	border: 3px solid #dddddd;
 	padding: 8px 20px;
 
-	display: flex;
-	align-items: center;
-	gap: 8px;
-
 	opacity: 1;
 	transform: translateY(0px);
 }
 
-.inventory.inventory--enter {
+.bottom-bar.bottom-bar--enter {
 	opacity: 0;
 	transform: translateY(4px);
 }
 
-.inventory.inventory--enter-active,
-.inventory.inventory--exit-active {
+.bottom-bar.bottom-bar--enter-active,
+.bottom-bar.bottom-bar--exit-active {
 	transition:
 		opacity var(--delay) ease-out,
 		transform var(--delay) ease-out;
 }
 
-.inventory.inventory--enter-active,
-.inventory.inventory--enter-done {
+.bottom-bar.bottom-bar--enter-active,
+.bottom-bar.bottom-bar--enter-done {
 	opacity: 1;
 	transform: translateY(0px);
 }
 
-.inventory.inventory--exit-active,
-.inventory.inventory--exit-done {
+.bottom-bar.bottom-bar--exit-active,
+.bottom-bar.bottom-bar--exit-done {
 	opacity: 0;
 	transform: translateY(4px);
+}
+
+.inventory {
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
 .inventory .__item {
