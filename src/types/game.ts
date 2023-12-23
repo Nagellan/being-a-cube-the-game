@@ -30,11 +30,17 @@ type GameActionEventListenerPayload = {
 	target: Creature;
 };
 
+type GameToggleCraftingEventListenerPayload = {
+	event: typeof GAME_EVENT.TOGGLE_CRAFTING;
+	target: Creature;
+};
+
 export type GameEventListenerPayload =
 	| GameStartEventListenerPayload
 	| GameStopEventListenerPayload
 	| GameClockEventListenerPayload
 	| GameMoveEventListenerPayload
-	| GameActionEventListenerPayload;
+	| GameActionEventListenerPayload
+	| GameToggleCraftingEventListenerPayload;
 
 export type GameEventListener = (payload: GameEventListenerPayload) => void;

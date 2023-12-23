@@ -22,4 +22,8 @@ export const GAME_EVENT = {
 	 * Действие существа
 	 */
 	ACTION: 'ACTION',
+	/**
+	 * Открытие/закрытие окна крафта
+	 */
+	TOGGLE_CRAFTING: 'TOGGLE_CRAFTING',
 } as const;

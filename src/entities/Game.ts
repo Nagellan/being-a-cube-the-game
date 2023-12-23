@@ -165,6 +165,14 @@ export class Game {
 					});
 					break;
 
+				// Открыть/закрыть окно крафта
+				case 'KeyE':
+					this.callEventListeners({
+						event: GAME_EVENT.TOGGLE_CRAFTING,
+						target: this.cube,
+					});
+					break;
+
 				default:
 					// игнорируем нажатия на любые другие клавиши
 					break;
